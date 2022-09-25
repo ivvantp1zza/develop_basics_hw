@@ -2,9 +2,42 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/media.css">
+        <link rel="icon" href="img/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sign in</title>
     </head>
     <body>
+        
+        <div class="responsive_page_menu_ctn" id="adaptive_menu">
+            <div class="responsive_page_menu" id="responsive_page_menu">
+                <div class="mainmenu_contents">
+                    <div class="mainmenu_contents_items">
+                            <a class="menuitem" href="https://store.steampowered.com/login/?redir=login%2F%3Fl%3Denglish&amp;redir_ssl=1&amp;snr=1_60_4__global-header">Login</a>
+                            <a class="menuitem supernav" href="" data-tooltip-type="selector" data-tooltip-content=".submenu_store">Store	                    
+                                <div class="chevron"></div></a>
+                            <a class="menuitem supernav" style="display: block" href="" data-tooltip-type="selector" data-tooltip-content=".submenu_community">Community
+                                <div class="chevron"></div></a>                       
+                            <a class="menuitem" href="https://help.steampowered.com/en/">Support</a>
+                            <div class="minor_menu_items">
+                                <div class="menuitem change_language_action">Change language</div>
+                                <div class="menuitem change_language_action">View desktop website</div>
+                            </div>
+                    </div>
+                    <div class="mainmenu_footer_spacer"></div>
+                    <div class="mainmenu_footer">
+                        <div class="mainmenu_footer_logo"><img src="https://store.akamai.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png"></div>
+                        © Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.
+                        <span class="mainmenu_valve_links">
+                            <a href="https://store.steampowered.com/privacy_agreement/?snr=1_60_4__global-responsive-menu" target="_blank">Privacy Policy</a>
+                            &nbsp;| &nbsp;<a href="http://www.valvesoftware.com/legal.htm" target="_blank">Legal</a>
+                            &nbsp;| &nbsp;<a href="https://store.steampowered.com/subscriber_agreement/?snr=1_60_4__global-responsive-menu" target="_blank">Steam Subscriber Agreement</a>
+                            &nbsp;| &nbsp;<a href="https://store.steampowered.com/steam_refunds/?snr=1_60_4__global-responsive-menu" target="_blank">Refunds</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="header">
             <div class="top_content">
                 <div class="logo_menu_box">
@@ -34,7 +67,19 @@
                 </div>
             </div>
         </div>
-        <div class="center_content">
+        <div class="header_adaptive_box">
+            <div class="header_adaptive">
+                <div class="menu_logo">
+                    <img id="menu_btn" src="https://store.cloudflare.steamstatic.com/public/shared/images/responsive/header_menu_hamburger.png" height="100%">
+                </div>
+                <div class="steam_logo">
+                    <a href="https://store.steampowered.com/?snr=1_60_4__global-responsive-menu">
+                        <img src="https://store.cloudflare.steamstatic.com/public/shared/images/responsive/header_logo.png" height="36" alt="STEAM">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="center_content" id="center_cont">
             <div class="center_content_box">
                 <div class="sign_heading">Sign in</div>
                 <div class="sign_in_background">
@@ -140,5 +185,6 @@
                 </div>
             </div>
         </div>
+        <script src="js/main.js"></script>
     </body>
 </html>
