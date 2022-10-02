@@ -1,0 +1,15 @@
+C:\Games\IL_Prac\HttpServer\HttpServer\bin\Debug\net6.0\HttpServer.exe
+C:\Games\IL_Prac\HttpServer\HttpServer\bin\Debug\net6.0\HttpServer.deps.json
+C:\Games\IL_Prac\HttpServer\HttpServer\bin\Debug\net6.0\HttpServer.runtimeconfig.json
+C:\Games\IL_Prac\HttpServer\HttpServer\bin\Debug\net6.0\HttpServer.dll
+C:\Games\IL_Prac\HttpServer\HttpServer\bin\Debug\net6.0\HttpServer.pdb
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\HttpServer.csproj.AssemblyReference.cache
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\HttpServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\HttpServer.AssemblyInfoInputs.cache
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\HttpServer.AssemblyInfo.cs
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\HttpServer.csproj.CoreCompileInputs.cache
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\HttpServer.dll
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\refint\HttpServer.dll
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\HttpServer.pdb
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\HttpServer.genruntimeconfig.cache
+C:\Games\IL_Prac\HttpServer\HttpServer\obj\Debug\net6.0\ref\HttpServer.dll
