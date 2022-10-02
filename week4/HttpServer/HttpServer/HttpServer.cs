@@ -30,8 +30,10 @@ public class HttpServer
                 var request = context.Request;
                 var response = context.Response;
                 byte[] googleBuffer;
+                var exePath = AppDomain.CurrentDomain.BaseDirectory;
+                var path = Path.Combine(exePath, @"..\..\..\index.html");
                 await using (var sourceStream = 
-                             File.Open(@"C:\Games\IL_Prac\HttpServer\HttpServer\index.html", FileMode.Open))
+                             File.Open(path, FileMode.Open))
                 {
                     googleBuffer = new byte[sourceStream.Length];
                     sourceStream.Read(googleBuffer, 0, (int)sourceStream.Length);
