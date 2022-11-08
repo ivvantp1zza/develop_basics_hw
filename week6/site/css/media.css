@@ -1,0 +1,97 @@
+@media (max-width: 910px) {
+    .footer_box {
+        display: none;
+    }
+
+    .bottom_content {
+        padding-bottom: 115px;
+    }
+
+    .header {
+        display: none;
+    }
+
+    .header_adaptive_box {
+        display: block;
+    }
+
+    .center_content {
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 700px) {
+    .sign_in_background {
+        background-color: transparent;
+        min-width: 300px;
+        padding: 24px 0px;
+
+    }
+    .phone_svg {
+        display: none;
+    }
+
+    .sign_in_box {
+        flex-direction: column;
+        align-content: center;
+        margin: 0 auto;
+        width: 270px;
+        min-width: 270px;
+        height: auto;
+        gap: 47px;
+
+    }
+
+    .sign_heading {
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .sign_in {
+        width: 100%;
+        gap: 12px;
+    }
+
+    .enter_login {
+        width: 270px;
+    }
+
+    .enter_password {
+        width: 270px;
+    }
+
+    input {
+        width: 248px;
+    }
+
+    .submit_btn {
+        width: 270px;
+        align-self: unset;
+    }
+
+    .qr_feature_box {
+        align-self: center;
+        align-items: center;
+    }
+
+    .beta_text {
+        text-align: center;
+    }
+
+    .center_content_box {
+        padding-top: 30px;
+        width: 100%;
+    }
+
+    .center_content {
+        background: radial-gradient(rgba(24, 26, 33, 0) 0%, #181A21 100%) fixed no-repeat, url(https://store.akamai.steamstatic.com/public/shared/images/joinsteam/new_login_bg_strong_mask_mobile.jpg) center top no-repeat, #181A21;
+        padding-bottom: 175px;
+    }
+
+    .join_btn_box {
+        margin-top: 9px;
+    }
+    .bottom_content {
+        flex-direction: column-reverse;
+    }
+}
