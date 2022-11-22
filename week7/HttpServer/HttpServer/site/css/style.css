@@ -1,0 +1,631 @@
+html {
+    margin: 0;
+    padding: 0;
+    background: #171a21;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Motiva Sans", Sans-serif;
+}
+
+.header {
+    width: auto;
+    background: #171a21;
+}
+
+.header_adaptive_box {
+    display: none;
+    background: #171a21;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 20;
+    box-shadow: 0 0 7px 0 rgb(0 0 0 / 75%);
+    overflow: hidden;
+    padding: 13px 8px;
+}
+
+.responsive_page_menu_ctn {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    background: black;
+    z-index: 30;
+    width: 280px;
+    display: none;
+}
+
+.menu_active {
+    display: block;
+}
+
+.responsive_page_menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.mainmenu_contents {
+    background: #171a21;
+    font-size: 22px;
+    position: relative;
+    min-height: 100%;
+}
+
+.mainmenu_contents_items {
+    font-family: "Motiva Sans", Sans-serif;
+    font-weight: 200;
+}
+
+.menuitem {
+    position: relative;
+    color: #bdbdbd;
+    background: #171a21;
+    border-top: 1px solid #2f3138;
+    border-bottom: 1px solid #000000;
+    display: block;
+    padding: 0 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 2.5em;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.minor_menu_items {
+    border-top: 1px solid #2f3138;
+    border-bottom: none;
+}
+
+.menuitem {
+    position: relative;
+    color: #bdbdbd;
+    background: #171a21;
+    border-top: 1px solid #2f3138;
+    border-bottom: 1px solid #000000;
+    display: block;
+    padding: 0 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 2.5em;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.change_language_action {
+    border: none;
+    font-size: 0.75em;
+    color: #8a8a8a;
+}
+
+.mainmenu_footer_spacer {
+    height: 160px;
+}
+
+.mainmenu_footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 10px;
+    white-space: normal;
+    color: #8a8a8a;
+    padding: 0 12px 24px 12px;
+}
+
+.mainmenu_footer_logo {
+    font-size: 10px;
+    white-space: normal;
+    color: #8a8a8a;
+}
+
+.mainmenu_valve_links {
+    font-size: 10px;
+    white-space: normal;
+    color: #8a8a8a;
+}
+
+.mainmenu_valve_links a {
+    color: #8a8a8a;
+}
+
+.menu_logo {
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    cursor: pointer;
+    width: 36px;
+    height: 31px;
+}
+
+.top_content {
+    width: 940px;
+    display: flex;
+    height: 104px;
+    margin: 0px auto;
+    justify-content: space-between;
+}
+
+.top_menu {
+    align-self: center;
+    display: flex;
+} 
+
+.top_menu a {
+    font-size: 13px;
+    color: #b8b6b4;
+    text-shadow: 1px 1px 2px #000000aa;
+    padding-top: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.logo {
+    align-self: center;
+    color: #b8b6b4;
+    margin-top: 4px;
+}
+
+.logo_menu_box {
+    display: flex;
+    width: 496px;
+    justify-content: space-between;
+}
+
+.action_menu {
+    line-height: 24px;
+    vertical-align: top;
+    width: auto;
+    padding-right: 13px;
+}
+
+.global_action_menu {
+    color: #b8b6b4;
+    font-size: 11px;
+    display: flex;
+    justify-content:space-between;
+    width: fit-content;
+    margin-top: 6px;
+}
+
+.install_btn {
+    background: #5c7e10;
+    display: flex;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.install_btn a {
+    background-repeat: no-repeat;
+    text-decoration: none;
+    color: #e5e4dc;
+    font-weight: normal;
+    display: inline-block;
+    padding-left: 35px;
+    padding-right: 9px;
+    align-self: center;
+    background-position: 10px 5px;
+    background-image: url(https://store.cloudflare.steamstatic.com/public/shared/images/header/btn_header_installsteam_download.png?v=1);
+    font-size: 11px;
+}
+
+.login_lang_box {
+    display: flex;
+    justify-content: space-between;
+    width: 109px;
+}
+
+.login {
+    font-size: 11px;
+    color: #b8b6b4;
+    text-decoration: none;
+    align-content: center;
+    margin-bottom: 10px;
+}
+
+.language {
+    padding-right: 18px;
+    background-image: url(https://store.cloudflare.steamstatic.com/public/shared/images/popups/btn_arrow_down_padded.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+    height: 24px;
+}
+
+.center_content {
+    padding: 0px 8px;
+    width: 100%;
+    padding-bottom: 137px;
+    background: radial-gradient(rgba(24, 26, 33, 0) 0%, #181A21 100%) fixed no-repeat, url(https://store.cloudflare.steamstatic.com/public/shared/images/joinsteam/new_login_bg_strong_mask.jpg) center top no-repeat, #181A21;
+
+}
+
+.center_content_box {
+    width: 700px;
+    height: 423px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 94px;
+}
+
+.sign_in_background {
+    background-color: #181a21;
+    border-radius: 4px;
+    padding: 24px 32px;
+    flex: 1;
+    min-width: 636px;
+    margin-top: 44px;
+}
+
+.sign_in_box {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+    height: 282px;
+    width: 636px;
+}
+
+.sign_in {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 412px;
+}
+
+.enter_login {
+    width: 100%;
+    margin-top: 3px;
+}
+
+input {
+    border-radius: 2px;
+    color: #fff;
+    padding: 10px;
+    background-color: #32353c;
+    outline: none;
+    font-size: 15px;
+    grid-area: input;
+    border: 1px solid #32353c;
+    display: inline-block;
+    text-align: start;
+    width: 392px;
+    margin-top: 3px;
+}
+
+.enter_password {
+    width: 100%;
+}
+
+.sign_login {
+    color: #1999ff;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    user-select: none;
+}
+
+.sign_password {
+    font-size: 12px;
+    color: #afafaf;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    user-select: none;
+}
+
+.sign_heading {
+    width: 100%;
+    color: #fff;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: .055em;
+    font-weight: 200;
+    margin-left: 18px;
+}
+
+.rememberme {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0px;
+    margin-top: 2px;
+}
+
+.remember_text {
+    color: #afafaf;
+    font-size: 12px;
+    user-select: none;
+    padding-left: 6px;
+}
+
+.newlogindialog_Checkbox_3tTFg {
+    width: 14px;
+    height: 14px;
+    padding: 3px;
+    border-radius: 2px;
+    background-color: #32353c;
+    cursor: pointer;
+    color: #E9E9E9;
+}
+
+.newlogindialog_Check_6EoZE {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    color: #E9E9E9;
+}
+
+.SVGIcon_Button {
+    fill: #fff;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+    max-width: 320px;
+    max-height: 320px;
+    color: #E9E9E9;
+}
+
+.submit_btn {
+    width: 270px;
+    position: relative;
+    background: linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%);
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    padding: 12px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: inherit;
+    text-align: center;
+    letter-spacing: .03em;
+    cursor: pointer;
+    align-self: center;
+    margin-bottom: 31px;
+    height: 50px;
+}
+
+.signin_help {
+    text-align: center;
+    color: #afafaf;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    margin-bottom: 2px;
+}
+
+.feature_heading {
+    color: #1999ff;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 6px 0px;
+    text-transform: uppercase;
+    letter-spacing: .02em
+}
+
+.qr_feature_box {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.qr_box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 0px;
+    color: #E9E9E9;
+    font-size: 12px;
+}
+
+.phone_svg {
+    width: 120px;
+    fill: #afafaf;
+    height: 52px;
+    overflow: hidden;
+}
+
+.beta_text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #afafaf;
+    margin: 8px;
+}
+
+.learn_more_btn {
+    background-color: rgba(255,255,255,.1);
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.show_qr {
+    text-align: center;
+    text-decoration-line: underline;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+    color: #afafaf;
+    padding: 12px 0px;
+    cursor: pointer;
+}
+
+.bottom_content {
+    display: flex;
+    flex-direction: row;
+    padding-top: 48px;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    justify-content: center;
+    background-color: #181A21;
+}
+
+.bottom_content_item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 200px;
+    font-size: 12px;
+    color: #E9E9E9;
+}
+
+.join_text {
+    font-size: 14px;
+    color: #b8b6b4
+}
+
+.join_more_btn {
+    max-width: 60%;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+
+.join_img {
+    max-width: 200px;
+}
+
+.join_btn_box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 200px;
+    font-size: 12px;
+    color: #E9E9E9;
+    margin-top: 20px;
+}
+
+.join_btn {
+    border-radius: 2px;
+    border: none;
+    padding: 1px;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none !important;
+    color: #fff !important;
+    background: transparent;
+    margin: 20px 0 10px 0;
+    display: block;
+    text-align: center;
+}
+
+.join_btn span {
+    padding: 0 15px;
+    font-size: 15px;
+    line-height: 30px;  
+    border-radius: 2px;
+    display: block;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 2px;
+}
+
+.footer_box {
+    background-color: #181A21;
+}
+
+.footer {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 16px 0 60px 0;
+    margin: 0;
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    background: #171a21;
+    padding-top: 126px;
+}
+
+.footer_content {
+    width: 940px;
+    margin: 0px auto;
+    padding-top: 16px;
+}
+
+.footer_logo_steam {
+    float: right;
+    padding-top: 2px;
+}
+
+.footer_logo_steam img {
+    height: 25px;
+    width: auto;
+}
+
+.footer_logo {
+    float: left;
+    padding-top: 2px;
+}
+
+.footer_logo img {
+    height: 25px;
+    width: auto;
+}
+
+.footer_text {
+    float: left;
+    margin-left: 12px;
+    color: #8F98A0;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.rule {
+    height: 8px;
+    border-top: 1px solid #363c44;
+}
+
+.footer_text a {
+    color: #C6D4DF;
+}
+
+.valve_links {
+    margin-top: 8px;
+    float: left;
+    font-family: "Motiva Sans", Sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    color: #61686D;
+}
+
+.valve_links a {
+    color: #C6D4DF;
+}
+
+.valve_links img {
+    vertical-align: bottom;
+}
