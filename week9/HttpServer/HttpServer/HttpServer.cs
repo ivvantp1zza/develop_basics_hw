@@ -58,8 +58,9 @@ public class HttpServer
         
     }
 
-    private byte[] TryGetFileBytes(string url)
+    private byte[] TryGetFileBytes(string url, out bool returnedDefault)
     {
+        returnedDefault = true;
         byte[] buffer = null;
         var directoryPath = _settings.Directory;
         var fullPath = directoryPath + url.Replace("/", "\\");
@@ -77,6 +78,7 @@ public class HttpServer
         }
         else if (File.Exists(fullPath))
         {
+            returnedDefault = false;
             using (var sourceStream = File.Open(fullPath, FileMode.Open))
             {
                 buffer = new byte[sourceStream.Length];
@@ -88,7 +90,7 @@ public class HttpServer
 
     private void StaticFileHandler(HttpListenerRequest request, HttpListenerResponse response)
     {
-        var file = TryGetFileBytes(request.RawUrl);
+        var file = TryGetFileBytes(request.RawUrl, out var retDefault);
         if (file is null)
         {
             response.Headers.Set("Content-Type", "text/plain");
@@ -100,7 +102,7 @@ public class HttpServer
         else
         {
             response.StatusCode = (int)HttpStatusCode.OK;
-            response.Headers.Set("Content-Type", HttpHelper.GetContentType(request.Url));
+            response.Headers.Set("Content-Type", retDefault ? "text/html" : HttpHelper.GetContentType(request.Url));
             response.ContentLength64 = file.Length;
             var output = response.OutputStream;
             output.Write(file, 0, file.Length);
@@ -150,6 +152,31 @@ public class HttpServer
             var login = parsed["Login"];
             var password = parsed["Password"];
             res = method.Invoke(Activator.CreateInstance(controller), new object[] { login, password });
+            if (res is int && (int)res != -1)
+            {
+                response.AddHeader("Set-Cookie", $"IsAuthorize: true, Id = {(int)res}");
+                response.ContentType = "text/plain";
+                var str = $"welcome {login}!";
+                byte[] buff = Encoding.ASCII.GetBytes(str);
+                response.ContentLength64 = buff.Length;
+                Stream op = response.OutputStream;
+                op.Write(buff, 0, buff.Length);
+                op.Close();
+                response.Close();
+                return true;
+            }
+            else
+            {
+                response.ContentType = "text/plain";
+                var str = $"No such user like {login} registered in system.";
+                byte[] buff = Encoding.ASCII.GetBytes(str);
+                response.ContentLength64 = buff.Length;
+                Stream op = response.OutputStream;
+                op.Write(buff, 0, buff.Length);
+                op.Close();
+                response.Close();
+                return true;
+            }
         }
         else
         {
@@ -165,7 +192,6 @@ public class HttpServer
 
         Stream output = response.OutputStream;
         output.Write(buffer, 0, buffer.Length);
-
         output.Close();
         response.Close();
         return true;

@@ -2,6 +2,7 @@
 using HttpServer.Models;
 using HttpServer.ORM;
 using System.Data.SqlClient;
+using System.Net;
 
 namespace HttpServer.Controllers;
 
@@ -23,10 +24,11 @@ public class Accounts
     }
     
     [HttpPOST]
-    public string SaveAccount(string login, string password)
+    public int Login(string login, string password)
     {
         var dao = new DAO("AppDB");
-        dao.Insert(new Account(login, password));
-        return $"user {login} {password} successfully added";
+        var accounts = dao.Select<Account>();
+        var acc = accounts.FirstOrDefault(x => x.Login == login && x.Password == password);
+        return acc is null ? -1 : acc.Id;
     }
 }

@@ -54,6 +54,24 @@ public class MyORM
         return default;
     }
 
+    public T Select<T>(string columnName, object value)
+    {
+        string sqlExpression = $"select * from {typeof(T).Name}s where {columnName} = {value}";
+
+        using SqlConnection connection = new SqlConnection(_connectionString);
+
+        connection.Open();
+        SqlCommand command = new SqlCommand(sqlExpression, connection);
+        using SqlDataReader reader = command.ExecuteReader();
+
+        if (reader.HasRows)
+        {
+            return GetInstances<T>(reader).ToList().FirstOrDefault();
+        }
+
+        return default;
+    }
+
     public void Insert<T>(T value)
     {
         var model = typeof(T);
