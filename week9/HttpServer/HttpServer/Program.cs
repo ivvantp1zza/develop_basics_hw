@@ -1,13 +1,14 @@
-﻿namespace HttpServer
+﻿using HttpServer.Cookies;
+
+namespace HttpServer
 {
     class Program
     {
         static void Main(string[] args)
-        
         {
             var server = new HttpServer();
             server.Start();
-            while(true)
+            while (true)
             {
                 ReadCommand(Console.ReadLine(), server);
             }

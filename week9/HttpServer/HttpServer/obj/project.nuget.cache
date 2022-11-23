@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WJEZXFiV+B+fzCR+STlf32bZ4q3v2B7npheKcUmQQyXKjmDlo5ghLOzEdDvcCWzfTx+8Lexd6F0T8DCQs8ntfA==",
+  "dgSpecHash": "zcDJVMB6i06pkAJYzNMT72DfDX24ZR1YCist/iIy+R+5Duhfe4eXxdmuEKOvnhYPk1stBzRvZ1OwXGelo4Ejtg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rafae\\OSNOVIRAZRABOTKI\\git_hw\\develop_basics_hw\\week9\\HttpServer\\HttpServer\\HttpServer.csproj",
+  "projectFilePath": "C:\\Games\\IL_Prac\\HttpServer\\HttpServer\\HttpServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rafae\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\rafae\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using HttpServer.Attributes;
 using HttpServer.Controllers;
+using HttpServer.Cookies;
 using Newtonsoft.Json;
 
 namespace HttpServer;
@@ -140,60 +141,70 @@ public class HttpServer
 
         if (controller == null) return false;
 
-        var method = controller.GetMethods()
-                .Where(m => m.GetCustomAttributes().Any(attr => attr.GetType().Name == $"Http{_httpContext.Request.HttpMethod}"))
-                .FirstOrDefault(t => strParams.Length > 0 ? t.GetParameters().Length == strParams.Length : t.GetCustomAttribute<HttpMethodAttribute>().Route == null);
+        var methods = controller.GetMethods()
+                .Where(m => m.GetCustomAttributes().Any(attr => attr.GetType().Name == $"Http{request.HttpMethod}")).ToList();
+                
+        var method = methods.FirstOrDefault(t => strParams.Length > 0 ? t.GetCustomAttribute<HttpMethodAttribute>().Route == "getById" : t.GetCustomAttribute<HttpMethodAttribute>().Route == null);
 
-
+        
         if (method == null) return false;
-        object? res = null; 
-        if(request.HttpMethod == HttpMethod.Post.Method)
+        object? res = null;
+        byte[] buffer = Array.Empty<byte>();
+        if(method == typeof(Accounts).GetMethod("Login"))
         {
             var login = parsed["Login"];
             var password = parsed["Password"];
             res = method.Invoke(Activator.CreateInstance(controller), new object[] { login, password });
-            if (res is int && (int)res != -1)
+            if ((int)res != -1)
             {
-                response.AddHeader("Set-Cookie", $"IsAuthorize: true, Id = {(int)res}");
-                response.ContentType = "text/plain";
-                var str = $"welcome {login}!";
-                byte[] buff = Encoding.ASCII.GetBytes(str);
-                response.ContentLength64 = buff.Length;
-                Stream op = response.OutputStream;
-                op.Write(buff, 0, buff.Length);
-                op.Close();
-                response.Close();
+                response.Cookies.Add(new Cookie("SessionId", $"{{\"IsAuthorize\":\"true\"@comma \"Id\": {(int)res}}}"));
+                res = $"welcome {login}!";
+                buffer = Encoding.ASCII.GetBytes(res.ToString());
+                ConfigureResponse(response, "text/plain", 200, buffer);
                 return true;
             }
             else
             {
-                response.ContentType = "text/plain";
-                var str = $"No such user like {login} registered in system.";
-                byte[] buff = Encoding.ASCII.GetBytes(str);
-                response.ContentLength64 = buff.Length;
-                Stream op = response.OutputStream;
-                op.Write(buff, 0, buff.Length);
-                op.Close();
-                response.Close();
+                res = $"No such user like {login} registered in system.";
+                buffer = Encoding.ASCII.GetBytes(res.ToString());
+                ConfigureResponse(response, "text/plain", 200, buffer);
                 return true;
             }
         }
         else
         {
-            object[] queryParams = method.GetParameters()
+            if(request.Cookies.Any(c => c.Name == "SessionId"))
+            {
+
+                var c = request.Cookies["SessionId"].Value.Replace("@comma", ",");
+                var cookie = System.Text.Json.JsonSerializer.Deserialize<SessionIdCookie>(c);
+                if (cookie._isAuth)
+                {
+                    object[] queryParams = method.GetParameters()
                             .Select((p, i) => Convert.ChangeType(strParams[i], p.ParameterType))
                             .ToArray();
-            res = method.Invoke(Activator.CreateInstance(controller), queryParams);
+                    res = method.Invoke(Activator.CreateInstance(controller), queryParams);
+                }
+            }
+            else
+            {
+                res = "Please, authorize before you can see users info";
+                ConfigureResponse(response, "text/plain", 401, buffer);
+                return true;
+            }
         }
-        response.ContentType = "Application/json";
+        var ct = "Application/json";
+        buffer = Encoding.ASCII.GetBytes(System.Text.Json.JsonSerializer.Serialize(res));
 
-        byte[] buffer = Encoding.ASCII.GetBytes(System.Text.Json.JsonSerializer.Serialize(res));
-        response.ContentLength64 = buffer.Length;
-
-        Stream output = response.OutputStream;
-        output.Write(buffer, 0, buffer.Length);
-        output.Close();
-        response.Close();
+        ConfigureResponse(response, ct, (int)HttpStatusCode.OK, buffer);
         return true;
+    }
+
+    private static void ConfigureResponse(HttpListenerResponse response, string contentType, int statusCode, byte[] buffer)
+    {
+        response.Headers.Set("Content-Type", contentType);
+        response.StatusCode = statusCode;
+        response.OutputStream.Write(buffer, 0, buffer.Length);
+        response.Close();
     }
 }

@@ -500,11 +500,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rafae\\OSNOVIRAZRABOTKI\\git_hw\\develop_basics_hw\\week9\\HttpServer\\HttpServer\\HttpServer.csproj",
+      "projectUniqueName": "C:\\Games\\IL_Prac\\HttpServer\\HttpServer\\HttpServer.csproj",
       "projectName": "HttpServer",
-      "projectPath": "C:\\Users\\rafae\\OSNOVIRAZRABOTKI\\git_hw\\develop_basics_hw\\week9\\HttpServer\\HttpServer\\HttpServer.csproj",
+      "projectPath": "C:\\Games\\IL_Prac\\HttpServer\\HttpServer\\HttpServer.csproj",
       "packagesPath": "C:\\Users\\rafae\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rafae\\OSNOVIRAZRABOTKI\\git_hw\\develop_basics_hw\\week9\\HttpServer\\HttpServer\\obj\\",
+      "outputPath": "C:\\Games\\IL_Prac\\HttpServer\\HttpServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
