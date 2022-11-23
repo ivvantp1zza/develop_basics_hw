@@ -144,13 +144,27 @@ public class HttpServer
         var methods = controller.GetMethods()
                 .Where(m => m.GetCustomAttributes().Any(attr => attr.GetType().Name == $"Http{request.HttpMethod}")).ToList();
                 
-        var method = methods.FirstOrDefault(t => strParams.Length > 0 ? t.GetCustomAttribute<HttpMethodAttribute>().Route == "getById" : t.GetCustomAttribute<HttpMethodAttribute>().Route == null);
-
+        var method = methods.FirstOrDefault(); /*t => strParams.Length > 0 ? t.GetCustomAttribute<HttpMethodAttribute>().Route == "getById" : t.GetCustomAttribute<HttpMethodAttribute>().Route == null*/
+        if (strParams.Length > 0)
+        {
+            if (int.TryParse(strParams.First(), out var num))
+            {
+                method = methods.FirstOrDefault(m => m.GetCustomAttribute<HttpMethodAttribute>().Route == "getById");
+            }
+            else if (strParams.First() == "profile")
+            {
+                method = methods.FirstOrDefault(m => m.GetCustomAttribute<HttpMethodAttribute>().Route == "profile");
+            }
+        }
+        else
+        {
+            method = methods.FirstOrDefault(m => m.GetCustomAttribute<HttpMethodAttribute>().Route == null);
+        }
         
         if (method == null) return false;
         object? res = null;
         byte[] buffer = Array.Empty<byte>();
-        if(method == typeof(Accounts).GetMethod("Login"))
+        if (method == typeof(Accounts).GetMethod("Login"))
         {
             var login = parsed["Login"];
             var password = parsed["Password"];
@@ -171,28 +185,32 @@ public class HttpServer
                 return true;
             }
         }
-        else
+        else if (request.Cookies.Any(c => c.Name == "SessionId"))
         {
-            if(request.Cookies.Any(c => c.Name == "SessionId"))
+            var c = request.Cookies["SessionId"].Value.Replace("@comma", ",");
+            var cookie = System.Text.Json.JsonSerializer.Deserialize<SessionIdCookie>(c);
+            if (cookie._isAuth)
             {
-
-                var c = request.Cookies["SessionId"].Value.Replace("@comma", ",");
-                var cookie = System.Text.Json.JsonSerializer.Deserialize<SessionIdCookie>(c);
-                if (cookie._isAuth)
+                if (method == typeof(Accounts).GetMethod("GetAccounts") || method == typeof(Accounts).GetMethod("GetAccountById"))
                 {
                     object[] queryParams = method.GetParameters()
                             .Select((p, i) => Convert.ChangeType(strParams[i], p.ParameterType))
                             .ToArray();
                     res = method.Invoke(Activator.CreateInstance(controller), queryParams);
                 }
-            }
-            else
-            {
-                res = "Please, authorize before you can see users info";
-                ConfigureResponse(response, "text/plain", 401, buffer);
-                return true;
+                else
+                {
+                    res = method.Invoke(Activator.CreateInstance(controller), new object[] { cookie.Id });
+                }
             }
         }
+        else
+        {
+            res = "Please, authorize";
+            ConfigureResponse(response, "text/plain", 401, buffer);
+            return true;
+        }
+        
         var ct = "Application/json";
         buffer = Encoding.ASCII.GetBytes(System.Text.Json.JsonSerializer.Serialize(res));
 

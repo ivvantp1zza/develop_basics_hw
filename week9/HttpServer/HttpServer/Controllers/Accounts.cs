@@ -22,6 +22,13 @@ public class Accounts
         var dao = new DAO("AppDB");
         return dao.SelectById<Account>(id);
     }
+
+    [HttpGET("profile")]
+    public Account GetAccountInfo(int id)
+    {
+        var dao = new DAO("AppDB");
+        return dao.SelectById<Account>(id);
+    }
     
     [HttpPOST]
     public int Login(string login, string password)
