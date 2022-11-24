@@ -6,6 +6,7 @@ using System.Text.Json;
 using HttpServer.Attributes;
 using HttpServer.Controllers;
 using HttpServer.Cookies;
+using HttpServer.Sessions;
 using Newtonsoft.Json;
 
 namespace HttpServer;
@@ -147,7 +148,7 @@ public class HttpServer
         var method = methods.FirstOrDefault(); /*t => strParams.Length > 0 ? t.GetCustomAttribute<HttpMethodAttribute>().Route == "getById" : t.GetCustomAttribute<HttpMethodAttribute>().Route == null*/
         if (strParams.Length > 0)
         {
-            if (int.TryParse(strParams.First(), out var num))
+            if (int.TryParse(strParams.First(), out _))
             {
                 method = methods.FirstOrDefault(m => m.GetCustomAttribute<HttpMethodAttribute>().Route == "getById");
             }
@@ -169,9 +170,9 @@ public class HttpServer
             var login = parsed["Login"];
             var password = parsed["Password"];
             res = method.Invoke(Activator.CreateInstance(controller), new object[] { login, password });
-            if ((int)res != -1)
+            if ((Guid)res != Guid.Empty)
             {
-                response.Cookies.Add(new Cookie("SessionId", $"{{\"IsAuthorize\":\"true\"@comma \"Id\": {(int)res}}}"));
+                response.Cookies.Add(new Cookie("SessionId", $"{(Guid)res}"));
                 res = $"welcome {login}!";
                 buffer = Encoding.ASCII.GetBytes(res.ToString());
                 ConfigureResponse(response, "text/plain", 200, buffer);
@@ -187,9 +188,8 @@ public class HttpServer
         }
         else if (request.Cookies.Any(c => c.Name == "SessionId"))
         {
-            var c = request.Cookies["SessionId"].Value.Replace("@comma", ",");
-            var cookie = System.Text.Json.JsonSerializer.Deserialize<SessionIdCookie>(c);
-            if (cookie._isAuth)
+            var c = request.Cookies["SessionId"].Value;
+            if (SessionManager.CheckSession(new Guid(c)))
             {
                 if (method == typeof(Accounts).GetMethod("GetAccounts") || method == typeof(Accounts).GetMethod("GetAccountById"))
                 {
@@ -198,15 +198,25 @@ public class HttpServer
                             .ToArray();
                     res = method.Invoke(Activator.CreateInstance(controller), queryParams);
                 }
+                //var cookie = System.Text.Json.JsonSerializer.Deserialize<SessionIdCookie>(c);
                 else
                 {
-                    res = method.Invoke(Activator.CreateInstance(controller), new object[] { cookie.Id });
+                    var session = SessionManager.GetSessionInfo(new Guid(c));
+                    res = method.Invoke(Activator.CreateInstance(controller), new object[] { session.AccountId });
                 }
+            }
+            else
+            {
+                res = "Your session ended, please reauthorize";
+                buffer = Encoding.ASCII.GetBytes(res.ToString());
+                ConfigureResponse(response, "text/plain", 401, buffer);
+                return true;
             }
         }
         else
         {
             res = "Please, authorize";
+            buffer = Encoding.ASCII.GetBytes(res.ToString());
             ConfigureResponse(response, "text/plain", 401, buffer);
             return true;
         }
